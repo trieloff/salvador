@@ -7,8 +7,11 @@
             [ring.util.http-response :refer :all]
             [schema.core :as s]
             [clojure.java.io :as io]
+            [org.httpkit.client :as http]
             [ring-aws-lambda-adapter.core :refer [defhandler]]
             [salvador.core :as env]
+            [clostache.parser :refer [render]]
+            [clojure.walk :refer [keywordize-keys]]
             [plumbing.core :refer [fnk]]))
 
 (def aws-gateway-options
@@ -30,8 +33,14 @@
                     500 {:schema {:code String} :description "Horror"}}
         :parameters {:query-params {:template String}}
         :summary "Render template with request map"
-        :handler (fnk [[:query-params template]]
-                    (ok [template]))})}))
+        :handler (fn [request]
+                   (let [template (-> request :query-params :template)
+                         parameters (dissoc (keywordize-keys (:query-params request)) :template)
+                         {:keys [status headers body error] :as string} @(http/get template)]
+                     (ok {:template-source template
+                          :parameters parameters
+                          :template-body body
+                          :template-expanded (render body parameters)})))})}))
 
 (def app
   (api
