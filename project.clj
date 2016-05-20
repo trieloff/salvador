@@ -16,11 +16,12 @@
             [lein-aws-api-gateway "1.10.68-1"]
             [lein-clj-lambda "0.4.0"]
             [lein-maven-s3-wagon "0.2.5"]]
-  :api-gateway {;:api-id "n0mn6xmgo7"
+  :api-gateway {:api-id "c8sc0xfjf7"
                 :swagger "target/swagger.json"}
 
   :test2junit-output-dir ~(or (System/getenv "CIRCLE_TEST_REPORTS") "target/test2junit")
   :env {:aws-access-key #=(eval (System/getenv "AWS_ACCESS_KEY"))
+        :lambda-arn #=(eval (System/getenv "LAMBDA_ARN"))
         :aws-secret-key #=(eval (System/getenv "AWS_SECRET_KEY"))}
   :lambda {"dev" [{:handler "salvador.handler.Lambda"
                   :memory-size 512

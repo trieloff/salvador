@@ -10,15 +10,6 @@
   (try
     (or (env/env x) (x (edn/read-string (slurp (io/resource ".lein-env")))))
     (catch java.lang.IllegalArgumentException e (env/env x))))
-;;   (->> ".lein-env"
-;;      io/resource
-;;      slurp
-;;      edn/read-string
-;;      (map x (env/env x))))
-
-(env/env :home)
-
-(or nil 1)
 
 (defn -main []
   "I don't do a whole lot."

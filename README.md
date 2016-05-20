@@ -108,3 +108,10 @@ Update the lamda function (ideally through your CI/CD system)
 ````
 lein lambda update dev
 ````
+
+Install the API Gateway API (just once)
+````
+lein test
+lein aws-api-gateway create
+````
+Copy the API ID and use it in your `project.clj`
