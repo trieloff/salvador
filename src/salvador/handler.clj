@@ -30,7 +30,7 @@
        aws-gateway-options
        {:responses {200 {:schema s/Any :description "Default response"}
                     302 {:schema s/Any :description "Redirect to `continue` location"}
-                    500 {:schema {:code String} :description "Horror"}}
+                    500 {:schema s/Any :description "Horror"}}
         :parameters {:query-params {:template String}}
         :summary "Render template with request map"
         :handler (fn [request]
