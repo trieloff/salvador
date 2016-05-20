@@ -5,7 +5,7 @@ deployment:
   production:
     branch: master
     commands:
-    - lein deploy private
+#    - lein deploy private
   staging:
     branch: lambda-deploy
     commands:
