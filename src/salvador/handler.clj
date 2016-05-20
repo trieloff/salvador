@@ -40,6 +40,7 @@
                      (ok {:template-source template
                           :parameters parameters
                           :template-body body
+                          :content-type "text/html"
                           :template-expanded (render body parameters)})))})}))
 
 (def app
