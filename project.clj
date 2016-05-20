@@ -1,4 +1,4 @@
-(defproject excelsior "0.1.0-SNAPSHOT"
+(defproject salvador "0.1.0-SNAPSHOT"
   :description "Mustache via HTTP"
   :url "https://github.com/trieloff/salvador"
   :dependencies [[org.clojure/clojure "1.7.0"]

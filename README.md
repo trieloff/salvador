@@ -88,3 +88,23 @@ P"" .,;<):(;/(\'>-)' ;!!!!!!!!!!!!!!!!!!!!!!!!!!!>.`"P" <!!!!!!! .`.`.`.`.`.
 (.;>:'<;:<;-/)/  <!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  .`.`.`.`.`.`.
 ;-;:>:.;`;(';' ;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' `.`.`.`.`.`.`.
 ````
+## Salvador
+
+This is a small microservice, written in Clojure to be indended to run on
+AWS Lambda with AWS API Gateway. The service will render a Mustache template
+(hence the name) that is provided as an URL parameter `template` with all
+parameters that have been passed in the URL.
+
+### Development
+
+Install the lambda function (just once)
+````
+lein lambda install dev
+````
+If it fails, try again.
+
+
+Update the lamda function (ideally through your CI/CD system)
+````
+lein lambda update dev
+````
