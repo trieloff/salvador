@@ -7,6 +7,7 @@
             [ring.util.http-response :refer :all]
             [schema.core :as s]
             [clojure.java.io :as io]
+            [ring-aws-lambda-adapter.core :refer [defhandler]]
             [salvador.core :as env]
             [plumbing.core :refer [fnk]]))
 
@@ -39,3 +40,4 @@
       :spec "/swagger.json"}}
       (context "/render" [] template-resource)))
 
+(defhandler salvador.handler.Lambda app {})
