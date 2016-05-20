@@ -17,6 +17,7 @@
 (def aws-gateway-options
   {:x-amazon-apigateway-integration
    {:responses {:default {:statusCode "200"
+                          :responseParameters {"method.response.header.Content-Type" "integration.response.body.headers.X-Content-Type"}
                           :responseTemplates {"application/json" "$input.json('$.body')"
                                               "text/html" "$input.json('$body.template-body')"}}}
     :requestTemplates { "application/json" (slurp (io/resource "bodymapping.vm")) }
