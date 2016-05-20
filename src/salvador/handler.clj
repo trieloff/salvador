@@ -17,7 +17,8 @@
 (def aws-gateway-options
   {:x-amazon-apigateway-integration
    {:responses {:default {:statusCode "200"
-                          :responseTemplates {"application/json" "$input.json('$.body')"}}}
+                          :responseTemplates {"application/json" "$input.json('$.body')"
+                                              "text/html" "$input.json('$body.template-body')"}}}
     :requestTemplates { "application/json" (slurp (io/resource "bodymapping.vm")) }
     :uri (str "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/" (env/env :lambda-arn) "/invocations")
     :httpMethod "POST"
@@ -37,11 +38,14 @@
                    (let [template (-> request :query-params :template)
                          parameters (dissoc (keywordize-keys (:query-params request)) :template)
                          {:keys [status headers body error] :as string} @(http/get template)]
-                     (ok {:template-source template
+                     {:status 200
+                      :headers {"content-type" "text/html" ;gets overwritten
+                                "X-Content-Type" "text/html"}
+                      :body {:template-source template
                           :parameters parameters
                           :template-body body
                           :content-type "text/html"
-                          :template-expanded (render body parameters)})))})}))
+                          :template-expanded (render body parameters)}}))})}))
 
 (def app
   (api
