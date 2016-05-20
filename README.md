@@ -115,3 +115,9 @@ lein test
 lein aws-api-gateway create
 ````
 Copy the API ID and use it in your `project.clj`
+
+
+Grant AWS API Gateway permissions to access the new Lambda function (just once)
+````
+aws lambda add-permission --function-name salvador-dev --statement-id lars-1 --action "lambda:*" --principal "apigateway.amazonaws.com"
+````
